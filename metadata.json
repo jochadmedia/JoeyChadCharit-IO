@@ -1,0 +1,12 @@
+{
+  "name": "Joey Chad Football IO",
+  "description": "Learn. Play. Remember. Joey Chad legacy football platform featuring Joey AI Football Coach, SkillSwap legend tutorials, AR Memory Lane, Skill Mastery challenges, and Joey Football Academy.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone",
+    "geolocation"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
