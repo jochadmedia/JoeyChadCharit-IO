@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { supabase } from './lib/supabase/supabaseClient';
+import { User, Session } from '@supabase/supabase-js';
 import { NavigationTab, CharityStats } from './types';
 import { Navbar } from './components/Navbar';
 import { JoeyCoachView } from './components/JoeyCoachView';
@@ -8,17 +10,22 @@ import { ChallengesView } from './components/ChallengesView';
 import { AcademyView } from './components/AcademyView';
 import { CharityView } from './components/CharityView';
 import { TeamHqView } from './components/TeamHqView';
-import { ScoutRadarView } from './components/ScoutRadarView';
-import { ClubhouseTvView } from './components/ClubhouseTvView';
-import { PreMatchRadarView } from './components/PreMatchRadarView';
-import { JuniorGrowthView } from './components/JuniorGrowthView';
-import { HeroSlider } from './components/HeroSlider';
-import { ToastProvider } from './components/Toast';
+import { ScoutRadarView } from './components/ScoutRadarView>;
+import { ClubhouseTvView } from './components/ClubhouseTvView>;
+import { PreMatchRadarView } from './components/PreMatchRadarView>;
+import { JuniorGrowthView } from './components/JuniorGrowthView>;
+import { HeroSlider } from './components/HeroSlider>;
+import { ToastProvider } from './components/Toast>;
 import { Heart, Sparkles, Shield, Trophy } from 'lucide-react';
+import PlayersList from './components/Football/PlayersList';
+import TeamsList from './components/Football/TeamsList>;
+import MatchesList from './components/Football/MatchesList>;
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<NavigationTab>('coach');
   const [isDonateModalOpen, setIsDonateModalOpen] = useState(false);
+  const [session, setSession] = useState<Session | null>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [charityStats, setCharityStats] = useState<CharityStats>({
     totalRaised: 128450,
     goal: 250000,
@@ -42,6 +49,21 @@ export default function App() {
         }
       })
       .catch(err => console.log('Using default charity stats:', err));
+
+    // Auth State Subscription
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+      setUser(session?.user ?? null);
+    });
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+      setUser(session?.user ?? null);
+    });
+
+    return () => subscription.unsubscribe();
   }, []);
 
   const handleDonateSubmit = async (name: string, amount: number, message: string) => {
@@ -86,6 +108,7 @@ export default function App() {
           onOpenDonateModal={() => {
             setActiveTab('charity');
           }}
+          user={user}
         />
 
         {/* Joey Chad Legacy Hero Carousel */}
@@ -113,6 +136,10 @@ export default function App() {
           {activeTab === 'charity' && (
             <CharityView charityStats={charityStats} onDonateSubmit={handleDonateSubmit} />
           )}
+          {/* New Football Management Views */}
+          {activeTab === 'players' && <PlayersList />}
+          {activeTab === 'teams' && <TeamsList />}
+          {activeTab === 'matches' && <MatchesList />}
         </main>
 
         {/* Footer */}
@@ -163,6 +190,16 @@ export default function App() {
                 <button onClick={() => setActiveTab('charity')} className="hover:text-emerald-400 transition-colors">
                   Charity
                 </button>
+                {/* New Football Management Tabs */}
+                <button onClick={() => setActiveTab('players')} className="hover:text-emerald-400 transition-colors">
+                  Players
+                </button>
+                <button onClick={() => setActiveTab('teams')} className="hover:text-emerald-400 transition-colors">
+                  Teams
+                </button>
+                <button onClick={() => setActiveTab('matches')} className="hover:text-emerald-400 transition-colors">
+                  Matches
+                </button>
               </div>
             </div>
 
@@ -179,4 +216,3 @@ export default function App() {
     </ToastProvider>
   );
 }
-
