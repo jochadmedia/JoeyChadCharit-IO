@@ -1,6 +1,7 @@
 import { supabase } from '../lib/supabase/supabaseClient';
 import { Player } from '../models/footballModels';
 import logger from '../utils/logger';
+import { storageService } from './storageService';
 
 export const playersService = {
   // Fetch all players
@@ -74,19 +75,50 @@ export const playersService = {
     }
   },
 
-  // Delete a player
+  // Delete a player and their media
   async deletePlayer(id: string): Promise<void> {
     try {
       logger.log(`Deleting player ID: ${id}`);
+      // First get the player to check for media
+      const player = await this.getPlayerById(id);
+      if (!player) throw new Error('Player not found');
+
+      // Delete media if exists
+      if (player.media_url) {
+        const path = player.media_url.split('/').slice(4).join('/');
+        await storageService.deleteFile('player-media', path);
+      }
+
+      // Delete the player record
       const { error } = await supabase
         .from('players')
         .delete()
         .eq('id', id);
       if (error) throw error;
+
       logger.log('Successfully deleted player', { id });
     } catch (error) {
       logger.error(`Error deleting player ID: ${id}`, error);
       throw error;
     }
   },
+
+  // Update player media URL
+  async updatePlayerMedia(id: string, mediaUrl: string): Promise<Player> {
+    try {
+      logger.log(`Updating media for player ID: ${id}`, { mediaUrl });
+      const { data, error } = await supabase
+        .from('players')
+        .update({ media_url: mediaUrl })
+        .eq('id', id)
+        .select()
+        .single();
+      if (error) throw error;
+      logger.log('Successfully updated player media', { id });
+      return data as Player;
+    } catch (error) {
+      logger.error(`Error updating media for player ID: ${id}`, error);
+      throw error;
+    }
+  }
 };

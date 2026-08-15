@@ -10,22 +10,25 @@ import { ChallengesView } from './components/ChallengesView';
 import { AcademyView } from './components/AcademyView';
 import { CharityView } from './components/CharityView';
 import { TeamHqView } from './components/TeamHqView';
-import { ScoutRadarView } from './components/ScoutRadarView>;
-import { ClubhouseTvView } from './components/ClubhouseTvView>;
-import { PreMatchRadarView } from './components/PreMatchRadarView>;
-import { JuniorGrowthView } from './components/JuniorGrowthView>;
-import { HeroSlider } from './components/HeroSlider>;
-import { ToastProvider } from './components/Toast>;
+import { ScoutRadarView } from './components/ScoutRadarView';
+import { ClubhouseTvView } from './components/ClubhouseTvView';
+import { PreMatchRadarView } from './components/PreMatchRadarView';
+import { JuniorGrowthView } from './components/JuniorGrowthView';
+import { HeroSlider } from './components/HeroSlider';
+import { ToastProvider } from './components/Toast';
+import AuthModal from './components/Auth/AuthModal';
 import { Heart, Sparkles, Shield, Trophy } from 'lucide-react';
 import PlayersList from './components/Football/PlayersList';
-import TeamsList from './components/Football/TeamsList>;
-import MatchesList from './components/Football/MatchesList>;
+import TeamsList from './components/Football/TeamsList';
+import MatchesList from './components/Football/MatchesList';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<NavigationTab>('coach');
   const [isDonateModalOpen, setIsDonateModalOpen] = useState(false);
   const [session, setSession] = useState<Session | null>(null);
   const [user, setUser] = useState<User | null>(null);
+  const [authModal, setAuthModal] = useState({ showAuth: false });
+  const [isSignUp, setIsSignUp] = useState(false);
   const [charityStats, setCharityStats] = useState<CharityStats>({
     totalRaised: 128450,
     goal: 250000,
@@ -97,6 +100,12 @@ export default function App() {
     handleDonateSubmit("Joey Challenge Unleashed", amount, `Unlocked from completing "${challengeTitle}"!`);
   };
 
+  const openAuthModal = () => {
+    setIsSignUp(false);
+    setAuthModal({ showAuth: true });
+  };
+  const closeAuthModal = () => { setAuthModal({ showAuth: false }); };
+
   return (
     <ToastProvider>
       <div className="min-h-screen bg-[#070F1B] text-slate-100 flex flex-col font-sans selection:bg-emerald-500 selection:text-slate-950">
@@ -109,7 +118,20 @@ export default function App() {
             setActiveTab('charity');
           }}
           user={user}
+          onOpenSignIn={openAuthModal}
         />
+
+        {/* Authentication Modal */}
+        {authModal.showAuth && (
+          <AuthModal
+            onClose={closeAuthModal}
+            onAuthSuccess={() => {
+              closeAuthModal();
+            }}
+            initialIsSignUp={isSignUp}
+            user={user}
+          />
+        )}
 
         {/* Joey Chad Legacy Hero Carousel */}
         <HeroSlider

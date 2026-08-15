@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { playersService } from '../../services/playersService';
 import { Player } from '../models/footballModels';
-import { teamsService } from '../../services/teamsService'; // Assuming teamsService is available
-import { Team } from '../models/footballModels'; // Assuming Team interface is available
+import { teamsService } from '../../services/teamsService';
+import { Team } from '../models/footballModels';
+import PlayerMediaUpload from './PlayerMediaUpload';
 
 interface AddEditPlayerProps {
   player?: Player; // Optional: If provided, it's for editing
@@ -14,6 +15,7 @@ const AddEditPlayer: React.FC<AddEditPlayerProps> = ({ player, onClose, onSave }
   const [name, setName] = useState(player?.name || '');
   const [position, setPosition] = useState(player?.position || '');
   const [teamId, setTeamId] = useState<string | undefined>(player?.team_id || '');
+  const [mediaUrl, setMediaUrl] = useState<string | undefined>(player?.media_url || '');
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [teams, setTeams] = useState<Team[]>([]);
@@ -59,6 +61,7 @@ const AddEditPlayer: React.FC<AddEditPlayerProps> = ({ player, onClose, onSave }
         name,
         position,
         team_id: teamId,
+        media_url: mediaUrl,
       };
 
       if (isEditing) {
@@ -77,6 +80,10 @@ const AddEditPlayer: React.FC<AddEditPlayerProps> = ({ player, onClose, onSave }
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleMediaUploadComplete = (url: string) => {
+    setMediaUrl(url);
   };
 
   return (
@@ -126,6 +133,14 @@ const AddEditPlayer: React.FC<AddEditPlayerProps> = ({ player, onClose, onSave }
             </select>
             {error && error.includes('team') && <p className="text-red-500 text-xs italic">{error}</p>}
             {!teams.length && !error && <p className="text-xs italic">Loading teams...</p>}
+          </div>
+          <div className="mb-6">
+            <label className="block text-gray-700 text-sm font-bold mb-2">Player Media:</label>
+            <PlayerMediaUpload
+              playerId={player?.id || 'new'}
+              currentMediaUrl={mediaUrl}
+              onUploadComplete={handleMediaUploadComplete}
+            />
           </div>
           {error && !error.includes('team') && <p className="text-red-500 text-xs italic mb-4">{error}</p>}
           <div className="flex items-center justify-between">
