@@ -10,7 +10,7 @@
     "start": "node server.js",
     "clean": "rm -rf dist",
     "lint": "tsc --noEmit",
-    "vercel": "vercel --max-workers 16",
+    "vercel": "vercel",
     "build:vercel": "vercel build:next --external-dir .vercel/supabase/server",
     "dev:vercel": "vercel dev --port 3000"
   },
