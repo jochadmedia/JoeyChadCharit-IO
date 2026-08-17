@@ -9,7 +9,11 @@ export type NavigationTab =
   | 'scout_radar'
   | 'clubhouse_tv'
   | 'prematch_radar'
-  | 'junior_growth';
+  | 'junior_growth'
+  | 'players'
+  | 'teams'
+  | 'matches'
+  | 'profile';
 
 export interface SquadMember {
   id: string;

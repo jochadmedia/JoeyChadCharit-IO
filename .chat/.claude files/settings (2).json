@@ -1,0 +1,18 @@
+{
+  "env": {
+    "ANTHROPIC_API_KEY": "freellmapi-67ac4586ad36ed13066bd43513946780ade8aaeebd468169",
+    "ANTHROPIC_BASE_URL": "http://localhost:3001",
+    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1",
+    "ANTHROPIC_DEFAULT_OPUS_MODEL": "auto",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL": "auto",
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "auto"
+} ,
+  "model": "Auto",
+  "statusLine": {
+    "type": "command",
+    "command": "node \"C:\\Users\\yourDeviceName(userName)\\.claude\\statusline.js\""
+  },
+  "effortLevel": "low",
+  "theme": "dark",
+  "switchModelsOnFlag": false
+}

@@ -122,7 +122,15 @@ export const Navbar: React.FC<NavbarProps> = ({
             
             {user ? (
               <div className="flex items-center gap-2 ml-2">
-                <div className="hidden sm:flex items-center gap-2 bg-slate-800/80 px-3 py-1.5 rounded-xl border border-slate-700/50">
+                <button
+                  onClick={() => setActiveTab('profile')}
+                  className={`flex items-center gap-2 px-3 py-1.5 rounded-xl border transition-all cursor-pointer ${
+                    activeTab === 'profile'
+                      ? 'bg-emerald-600/30 border-emerald-500 text-white shadow-md shadow-emerald-900/30'
+                      : 'bg-slate-800/80 hover:bg-slate-700/90 border-slate-700/50 text-slate-200 hover:text-white'
+                  }`}
+                  title="View Profile"
+                >
                   <div className="w-5 h-5 rounded-full bg-emerald-600 overflow-hidden flex items-center justify-center border border-emerald-500 shrink-0">
                     {user.user_metadata?.avatar_url ? (
                       <img src={user.user_metadata.avatar_url} alt="User avatar" className="w-full h-full object-cover" />
@@ -130,10 +138,10 @@ export const Navbar: React.FC<NavbarProps> = ({
                       <Users className="w-3 h-3 text-white" />
                     )}
                   </div>
-                  <span className="text-xs font-semibold text-slate-200 truncate max-w-[100px]">
+                  <span className="text-xs font-semibold truncate max-w-[100px]">
                     {user.user_metadata?.full_name?.split(' ')[0] || user.email?.split('@')[0]}
                   </span>
-                </div>
+                </button>
                 <button
                   onClick={handleSignOut}
                   className="bg-slate-800 hover:bg-slate-700 text-slate-300 px-2.5 py-1.5 rounded-xl transition-colors cursor-pointer border border-slate-700 hover:text-white"

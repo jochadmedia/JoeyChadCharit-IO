@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from './lib/supabase/supabaseClient';
 import { User, Session } from '@supabase/supabase-js';
-import { NavigationTab, CharityStats } from './types';
+import { NavigationTab, CharityStats, UserProfile } from './types';
 import { Navbar } from './components/Navbar';
 import { JoeyCoachView } from './components/JoeyCoachView';
 import { SkillSwapView } from './components/SkillSwapView';
@@ -21,12 +21,17 @@ import { Heart, Sparkles, Shield, Trophy } from 'lucide-react';
 import PlayersList from './components/Football/PlayersList';
 import TeamsList from './components/Football/TeamsList';
 import MatchesList from './components/Football/MatchesList';
+import ProfileList from './components/Profile/ProfileList';
+import { profileService } from './lib/auth/profileService';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<NavigationTab>('coach');
   const [isDonateModalOpen, setIsDonateModalOpen] = useState(false);
   const [session, setSession] = useState<Session | null>(null);
   const [user, setUser] = useState<User | null>(null);
+  const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
+  const [isLoadingProfile, setIsLoadingProfile] = useState(false);
+  const [profileError, setProfileError] = useState<string | null>(null);
   const [authModal, setAuthModal] = useState({ showAuth: false });
   const [isSignUp, setIsSignUp] = useState(false);
   const [charityStats, setCharityStats] = useState<CharityStats>({
@@ -68,6 +73,42 @@ export default function App() {
 
     return () => subscription.unsubscribe();
   }, []);
+
+  // Hydrate user profile state on auth state change
+  useEffect(() => {
+    if (user) {
+      setIsLoadingProfile(true);
+      setProfileError(null);
+      profileService
+        .fetchProfileData(user.id)
+        .then((fetched) => {
+          if (fetched) {
+            setUserProfile(fetched);
+          } else {
+            setUserProfile({
+              id: user.id,
+              email: user.email || '',
+              displayName: user.user_metadata?.full_name || user.email?.split('@')[0] || 'Player',
+              avatarUrl: user.user_metadata?.avatar_url,
+              createdAt: user.created_at,
+            });
+          }
+        })
+        .catch((err) => {
+          console.error('Failed to fetch profile:', err);
+          setUserProfile({
+            id: user.id,
+            email: user.email || '',
+            displayName: user.user_metadata?.full_name || user.email?.split('@')[0] || 'Player',
+            avatarUrl: user.user_metadata?.avatar_url,
+            createdAt: user.created_at,
+          });
+        })
+        .finally(() => setIsLoadingProfile(false));
+    } else {
+      setUserProfile(null);
+    }
+  }, [user]);
 
   const handleDonateSubmit = async (name: string, amount: number, message: string) => {
     try {
@@ -143,6 +184,15 @@ export default function App() {
 
         {/* Main Content View Switcher */}
         <main className="flex-1">
+          {activeTab === 'profile' && (
+            <div className="py-8 px-4">
+              <ProfileList
+                user={userProfile}
+                isLoading={isLoadingProfile}
+                error={profileError}
+              />
+            </div>
+          )}
           {activeTab === 'coach' && <JoeyCoachView />}
           {activeTab === 'team_hq' && <TeamHqView />}
           {activeTab === 'scout_radar' && <ScoutRadarView />}
@@ -229,7 +279,7 @@ export default function App() {
               <p>© 2026 Joey Chad Legacy Foundation. All proceeds support youth sports & mental health charities.</p>
               <p className="flex items-center gap-1">
                 <span>Powered by</span>
-                <span className="text-emerald-400 font-bold">Google Gemini AI</span>
+                <span className="text-emerald-400 font-bold">Top Chart Media</span>
               </p>
             </div>
           </div>

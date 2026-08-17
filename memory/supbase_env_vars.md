@@ -1,0 +1,3 @@
+- The user wants to save information about the Supabase environment variables from `.env.supabase` to memory.
+- The content of `.env.supabase` includes `SUPABASE_ACCESS_TOKEN`, `API_URL`, `SUPABASE_URL`, and `SUPABASE_ANON_KEY`.
+- The user's request is to save this to memory, implying it's important context to retain.

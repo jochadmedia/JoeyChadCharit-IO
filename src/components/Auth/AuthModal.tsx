@@ -29,21 +29,50 @@ const AuthModal: React.FC<AuthModalProps> = ({
     try {
       setIsLoading(true);
       setError(null);
-      const authUser = await supabase.auth.signInWithOAuth({
+      const { error: oauthError } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: 'http://localhost:3000',
+          redirectTo: window.location.origin,
         },
       });
 
-      const { data: session } = await supabase.auth.getUser();
-
-      if (session?.user?.id === user?.id) {
-        navigate('/app/profile');
-      } else {
-        onClose();
+      if (oauthError) {
+        if (oauthError.message?.includes('invalid_client') || oauthError.status === 401) {
+          setError('Google OAuth is currently not configured on the server (Error 401: invalid_client). Please use Email Sign In below or configure Google OAuth provider credentials in your Supabase Dashboard.');
+        } else {
+          setError(oauthError.message || 'Failed to initialize Google Sign In.');
+        }
       }
-    } catch (error: any) {
+    } catch (err: any) {
+      setError(err?.message || 'Google Sign In error occurred. Please try again or use Email Sign In.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleMagicLinkSignIn = async () => {
+    setError(null);
+    setSuccessMessage(null);
+    if (!email) {
+      setError('Please enter your email to receive a magic link.');
+      return;
+    }
+    
+    setIsLoading(true);
+    try {
+      const { error: authError } = await supabase.auth.signInWithOtp({
+        email,
+        options: {
+          emailRedirectTo: window.location.origin,
+        },
+      });
+
+      if (authError) {
+        setError(authError.message);
+      } else {
+        setSuccessMessage('Magic link sent! Check your email to sign in.');
+      }
+    } catch (err: any) {
       setError(err.message);
     } finally {
       setIsLoading(false);
@@ -199,23 +228,40 @@ const AuthModal: React.FC<AuthModalProps> = ({
                   id="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  required
                   className="w-full px-3 py-2 bg-slate-800/50 border border-slate-700 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 text-white"
-                  placeholder="Enter your password"
+                  placeholder="Enter your password (not needed for magic link)"
                 />
               </div>
-              <button
-                type="submit"
-                disabled={isLoading}
-                className={`w-full px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-md transition-colors ${
-                  isLoading ? 'opacity-50 cursor-not-allowed' : ''
-                }`}
-              >
-                {isLoading ? 'Signing In...' : 'Sign In'}
-              </button>
+              
+              <div className="flex gap-2 pt-2">
+                <button
+                  type="submit"
+                  disabled={isLoading}
+                  className={`w-1/2 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-md transition-colors ${
+                    isLoading ? 'opacity-50 cursor-not-allowed' : ''
+                  }`}
+                >
+                  {isLoading ? 'Signing In...' : 'Sign In'}
+                </button>
+                <button
+                  type="button"
+                  onClick={handleMagicLinkSignIn}
+                  disabled={isLoading}
+                  className={`w-1/2 px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white font-semibold rounded-md transition-colors ${
+                    isLoading ? 'opacity-50 cursor-not-allowed' : ''
+                  }`}
+                >
+                  Magic Link
+                </button>
+              </div>
             </form>
 
-            <div className="flex items-center justify-center mt-4">
+            <div className="relative flex items-center justify-center my-4">
+              <div className="border-t border-slate-700 w-full"></div>
+              <span className="bg-[#0B192C]/95 px-2 text-xs text-slate-500 absolute">OR</span>
+            </div>
+
+            <div className="flex items-center justify-center mt-2">
               <button
                 onClick={handleGoogleSignIn}
                 disabled={isLoading}
