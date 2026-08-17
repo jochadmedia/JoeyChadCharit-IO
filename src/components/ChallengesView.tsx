@@ -178,7 +178,7 @@ export const ChallengesView: React.FC<ChallengesViewProps> = ({ onUnlockCharityD
 
                   <div className="bg-emerald-950/40 p-2 rounded-xl border border-emerald-800/40 col-span-2 sm:col-span-1">
                     <span className="text-[9px] text-emerald-400 font-bold uppercase block">Charity Reward</span>
-                    <span className="text-emerald-300 font-bold">+${challenge.charityUnlockAmount} Donated</span>
+                    <span className="text-emerald-300 font-bold">+€{challenge.charityUnlockAmount} Donated</span>
                   </div>
                 </div>
               </div>
@@ -222,7 +222,7 @@ export const ChallengesView: React.FC<ChallengesViewProps> = ({ onUnlockCharityD
 
                   <div className="text-right">
                     <p className="text-xs font-bold text-amber-400">{user.points} XP</p>
-                    <p className="text-[10px] text-emerald-400 font-semibold">${user.charityRaised} Raised</p>
+                    <p className="text-[10px] text-emerald-400 font-semibold">€{user.charityRaised} Raised</p>
                   </div>
                 </div>
               ))}
