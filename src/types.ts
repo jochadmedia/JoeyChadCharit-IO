@@ -13,7 +13,8 @@ export type NavigationTab =
   | 'players'
   | 'teams'
   | 'matches'
-  | 'profile';
+  | 'profile'
+  | 'about';
 
 export interface SquadMember {
   id: string;

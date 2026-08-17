@@ -3,7 +3,14 @@ import { DrillResponse } from '../types';
 import { Sparkles, Play, Pause, Volume2, CheckCircle2, Bookmark, Flame, Zap, Shield, RotateCcw, ArrowRight, Video, Mic, Film, X } from 'lucide-react';
 import { useToast } from './Toast';
 
-export const JoeyCoachView: React.FC = () => {
+import { User } from '@supabase/supabase-js';
+
+interface JoeyCoachViewProps {
+  user: User | null;
+  onRequireAuth: () => void;
+}
+
+export const JoeyCoachView: React.FC<JoeyCoachViewProps> = ({ user, onRequireAuth }) => {
   const [query, setQuery] = useState('');
   const [isListening, setIsListening] = useState(false);
   const [showHighlightModal, setShowHighlightModal] = useState(false);
@@ -63,6 +70,10 @@ export const JoeyCoachView: React.FC = () => {
   }, []);
 
   const startVoiceRecording = () => {
+    if (!user) {
+      onRequireAuth();
+      return;
+    }
     const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
     if (SpeechRecognition) {
       const recognition = new SpeechRecognition();
@@ -96,6 +107,10 @@ export const JoeyCoachView: React.FC = () => {
   ];
 
   const handleSearch = async (userQuery?: string) => {
+    if (!user) {
+      onRequireAuth();
+      return;
+    }
     const q = userQuery || query;
     if (!q.trim()) return;
 

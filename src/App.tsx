@@ -9,6 +9,7 @@ import { MemoryLaneView } from './components/MemoryLaneView';
 import { ChallengesView } from './components/ChallengesView';
 import { AcademyView } from './components/AcademyView';
 import { CharityView } from './components/CharityView';
+import { AboutJoeyView } from './components/AboutJoeyView';
 import { TeamHqView } from './components/TeamHqView';
 import { ScoutRadarView } from './components/ScoutRadarView';
 import { ClubhouseTvView } from './components/ClubhouseTvView';
@@ -193,7 +194,7 @@ export default function App() {
               />
             </div>
           )}
-          {activeTab === 'coach' && <JoeyCoachView />}
+          {activeTab === 'coach' && <JoeyCoachView user={user} onRequireAuth={() => setIsAuthModalOpen(true)} />}
           {activeTab === 'team_hq' && <TeamHqView />}
           {activeTab === 'scout_radar' && <ScoutRadarView />}
           {activeTab === 'skillswap' && <SkillSwapView />}
@@ -212,6 +213,7 @@ export default function App() {
           {activeTab === 'players' && <PlayersList />}
           {activeTab === 'teams' && <TeamsList />}
           {activeTab === 'matches' && <MatchesList />}
+          {activeTab === 'about' && <AboutJoeyView />}
         </main>
 
         {/* Footer */}
@@ -248,7 +250,10 @@ export default function App() {
                   Pre-Match
                 </button>
                 <button onClick={() => setActiveTab('junior_growth')} className="hover:text-emerald-400 transition-colors">
-                  Junior Joey
+                  Junior
+                </button>
+                <button onClick={() => setActiveTab('about')} className="hover:text-emerald-400 transition-colors">
+                  About Joey
                 </button>
                 <button onClick={() => setActiveTab('ar_memory')} className="hover:text-emerald-400 transition-colors">
                   AR Pitch

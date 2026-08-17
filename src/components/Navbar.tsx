@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavigationTab, CharityStats } from '../types';
-import { Sparkles, Trophy, Video, MapPin, Heart, BookOpen, Users, Zap, Tv, Compass, Shield, LogOut, Mail, UserPlus } from 'lucide-react';
+import { Sparkles, Trophy, Video, MapPin, Heart, BookOpen, Users, Zap, Tv, Compass, Shield, LogOut, Mail, UserPlus, Star } from 'lucide-react';
 import { supabase } from '../lib/supabase/supabaseClient';
 import { User } from '@supabase/supabase-js';
 
@@ -49,6 +49,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     { id: 'ar_memory', label: 'Memory Lane AR', icon: <MapPin className="w-3.5 h-3.5" /> },
     { id: 'challenges', label: 'Challenges', icon: <Trophy className="w-3.5 h-3.5" /> },
     { id: 'academy', label: 'Academy', icon: <BookOpen className="w-3.5 h-3.5" /> },
+    { id: 'about', label: 'About Joey', icon: <Star className="w-3.5 h-3.5" /> },
     { id: 'charity', label: 'Charity', icon: <Heart className="w-3.5 h-3.5" /> }
   ];
 

@@ -73,8 +73,79 @@ export const CharityView: React.FC<CharityViewProps> = ({ charityStats, onDonate
         </div>
       </div>
 
+      {/* Subscription / Support Tiers */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-black text-white text-center">Legacy Supporter Tiers</h2>
+        <p className="text-slate-400 text-sm text-center max-w-2xl mx-auto">
+          We do not believe in paywalls for learning. However, you can unlock premium AI tools and exclusive features by supporting the Joey Chad Foundation.
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-6 max-w-4xl mx-auto">
+          {/* Free Tier */}
+          <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-4 flex flex-col opacity-80 hover:opacity-100 transition-opacity">
+            <div>
+              <p className="text-xs text-slate-400 font-bold uppercase tracking-wider">Rookie</p>
+              <p className="text-3xl font-black text-white mt-1">Free</p>
+            </div>
+            <ul className="space-y-3 text-sm text-slate-300 flex-1">
+              <li className="flex items-start gap-2">
+                <CheckCircle2 className="w-4 h-4 text-slate-500 mt-0.5 shrink-0" />
+                <span>Basic access to Team HQ and Drills</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <CheckCircle2 className="w-4 h-4 text-slate-500 mt-0.5 shrink-0" />
+                <span>Join Community Challenges</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <CheckCircle2 className="w-4 h-4 text-slate-500 mt-0.5 shrink-0" />
+                <span>Limited Joey AI Coach Queries</span>
+              </li>
+            </ul>
+            <button className="w-full py-2.5 rounded-xl border border-slate-700 text-slate-300 text-xs font-bold bg-slate-950">
+              Current Plan
+            </button>
+          </div>
+
+          {/* Legacy Supporter Tier */}
+          <div className="bg-gradient-to-b from-emerald-900/40 to-slate-900 border border-emerald-500/50 rounded-3xl p-6 space-y-4 flex flex-col relative overflow-hidden shadow-lg shadow-emerald-900/20">
+            <div className="absolute top-0 right-0 bg-emerald-500 text-slate-950 text-[10px] font-black px-3 py-1 rounded-bl-xl uppercase tracking-wider">
+              Recommended
+            </div>
+            <div>
+              <p className="text-xs text-emerald-400 font-bold uppercase tracking-wider">Legacy Supporter</p>
+              <p className="text-3xl font-black text-white mt-1">Donation-Based</p>
+            </div>
+            <ul className="space-y-3 text-sm text-slate-300 flex-1">
+              <li className="flex items-start gap-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-400 mt-0.5 shrink-0" />
+                <span className="font-medium text-white">Unlimited Joey AI Coach Access</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-400 mt-0.5 shrink-0" />
+                <span>Advanced Scout Radar & Pre-Match Analysis</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-400 mt-0.5 shrink-0" />
+                <span>Exclusive "Legacy Supporter" Profile Badge</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-400 mt-0.5 shrink-0" />
+                <span>100% of proceeds go to youth mental health</span>
+              </li>
+            </ul>
+            <button 
+              onClick={() => {
+                document.getElementById('donation-form')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="w-full py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-black transition-colors"
+            >
+              Become a Supporter Below
+            </button>
+          </div>
+        </div>
+      </div>
+
       {/* Main Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8" id="donation-form">
         {/* Donation Form */}
         <div className="lg:col-span-6 bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-6 shadow-xl">
           <h2 className="text-xl font-bold text-white flex items-center gap-2">
