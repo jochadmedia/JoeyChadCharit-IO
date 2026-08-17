@@ -40,6 +40,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   const mainNavItems: { id: NavigationTab; label: string; icon: React.ReactNode; badge?: string }[] = [
     { id: 'coach', label: 'Joey AI Coach', icon: <Sparkles className="w-3.5 h-3.5" />, badge: 'AI' },
+    { id: 'about', label: 'About Joey', icon: <Star className="w-3.5 h-3.5" /> },
     { id: 'team_hq', label: 'Team HQ', icon: <Users className="w-3.5 h-3.5" />, badge: 'Coach' },
     { id: 'scout_radar', label: 'Scout Radar', icon: <Zap className="w-3.5 h-3.5" /> },
     { id: 'skillswap', label: 'SkillSwap', icon: <Video className="w-3.5 h-3.5" /> },
@@ -49,7 +50,6 @@ export const Navbar: React.FC<NavbarProps> = ({
     { id: 'ar_memory', label: 'Memory Lane AR', icon: <MapPin className="w-3.5 h-3.5" /> },
     { id: 'challenges', label: 'Challenges', icon: <Trophy className="w-3.5 h-3.5" /> },
     { id: 'academy', label: 'Academy', icon: <BookOpen className="w-3.5 h-3.5" /> },
-    { id: 'about', label: 'About Joey', icon: <Star className="w-3.5 h-3.5" /> },
     { id: 'charity', label: 'Charity', icon: <Heart className="w-3.5 h-3.5" /> }
   ];
 
