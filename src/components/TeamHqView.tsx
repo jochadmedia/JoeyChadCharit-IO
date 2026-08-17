@@ -130,7 +130,7 @@ export const TeamHqView: React.FC = () => {
 
         <div className="bg-slate-900 p-5 rounded-3xl border border-slate-800 space-y-1">
           <span className="text-xs text-slate-400 font-semibold uppercase">Team Charity Raised</span>
-          <p className="text-3xl font-black text-emerald-400">$320.00</p>
+          <p className="text-3xl font-black text-emerald-400">€320.00</p>
           <p className="text-[11px] text-emerald-300">Sponsor Matched by Dublin Motors</p>
         </div>
       </div>

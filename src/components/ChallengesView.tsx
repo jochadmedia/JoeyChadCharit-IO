@@ -18,7 +18,7 @@ export const ChallengesView: React.FC<ChallengesViewProps> = ({ onUnlockCharityD
     { title: "Rainbow Master", unlocked: true, icon: "🌈", desc: "Executed Joey's signature move" },
     { title: "Crossbar Sniper", unlocked: false, icon: "🎯", desc: "Hit crossbar 3 times in 5 tries" },
     { title: "Air Juggle Champion", unlocked: false, icon: "🔥", desc: "Reached 50 consecutive juggles" },
-    { title: "Charity Hero", unlocked: true, icon: "❤️", desc: "Unlocked $20+ for Joey's Foundation" },
+    { title: "Charity Hero", unlocked: true, icon: "❤️", desc: "Unlocked €20+ for Joey's Foundation" },
     { title: "Legion #7 Legacy", unlocked: false, icon: "⭐", desc: "Complete 10 total daily challenges" }
   ];
 
@@ -74,7 +74,7 @@ export const ChallengesView: React.FC<ChallengesViewProps> = ({ onUnlockCharityD
           </div>
           <div>
             <p className="text-xs text-slate-400 font-semibold">Unlocked For Charity</p>
-            <p className="text-2xl font-black text-emerald-400">$40.00</p>
+            <p className="text-2xl font-black text-emerald-400">€40.00</p>
           </div>
         </div>
 

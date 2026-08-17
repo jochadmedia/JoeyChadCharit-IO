@@ -165,11 +165,11 @@ export const ClubhouseTvView: React.FC = () => {
           <div className="flex items-center gap-3 text-amber-300">
             <Heart className="w-5 h-5 text-amber-400 fill-amber-400 shrink-0" />
             <span>
-              <strong className="text-white">Clubhouse Sponsor Donation Match:</strong> Local sponsor Dublin Motors is matching $1 per skill point up to <strong>$500</strong> for Joey's Foundation!
+              <strong className="text-white">Clubhouse Sponsor Donation Match:</strong> Local sponsor Dublin Motors is matching €1 per skill point up to <strong>€500</strong> for Joey's Foundation!
             </span>
           </div>
           <span className="bg-amber-500 text-slate-950 font-black px-3.5 py-1.5 rounded-xl shrink-0">
-            $500 Pool Unlocked
+            €500 Pool Unlocked
           </span>
         </div>
 

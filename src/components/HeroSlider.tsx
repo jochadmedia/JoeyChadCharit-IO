@@ -47,7 +47,7 @@ const HERO_SLIDES: HeroSlide[] = [
   {
     id: 'slide-2',
     badge: 'Joey Chad Legacy Foundation',
-    title: '$128,450 Raised for Youth Mental Health & Grassroots Football',
+    title: 'Boost Grassroots Football Fund Support',
     subtitle: 'Every drill completed and challenge unlocked matches sponsor donations to build community sports facilities and mental health programs.',
     quote: '"Football gave me everything. My dream is for every kid to have a ball, a safe pitch, and someone who believes in them."',
     category: 'Charity Impact',
@@ -57,9 +57,9 @@ const HERO_SLIDES: HeroSlide[] = [
     secondaryCtaLabel: 'View Clubhouse TV Broadcast',
     secondaryTab: 'clubhouse_tv',
     stats: [
-      { label: 'Total Raised', value: '$128,450' },
+      { label: 'Total Raised', value: '€128,450' },
       { label: 'Donors', value: '3,420 Fans' },
-      { label: 'Sponsor Match', value: '$500 Pool' }
+      { label: 'Sponsor Match', value: '€500 Pool' }
     ]
   },
   {

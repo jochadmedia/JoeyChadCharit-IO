@@ -47,8 +47,8 @@ export const CharityView: React.FC<CharityViewProps> = ({ charityStats, onDonate
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 space-y-2">
           <p className="text-xs text-slate-400 font-semibold uppercase">Total Funds Raised</p>
-          <p className="text-3xl font-black text-emerald-400">${charityStats.totalRaised.toLocaleString()}</p>
-          <p className="text-xs text-slate-500">Goal: ${charityStats.goal.toLocaleString()} ({percentGoal}%)</p>
+          <p className="text-3xl font-black text-emerald-400">€{charityStats.totalRaised.toLocaleString()}</p>
+          <p className="text-xs text-slate-500">Goal: €{charityStats.goal.toLocaleString()} ({percentGoal}%)</p>
           <div className="w-full bg-slate-800 h-2 rounded-full overflow-hidden mt-1">
             <div className="bg-emerald-500 h-full" style={{ width: `${percentGoal}%` }}></div>
           </div>
@@ -175,7 +175,7 @@ export const CharityView: React.FC<CharityViewProps> = ({ charityStats, onDonate
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-slate-300">Select Donation Amount ($ USD):</label>
+                <label className="text-xs font-semibold text-slate-300">Select Donation Amount (€ EUR):</label>
                 <div className="grid grid-cols-4 gap-2 mb-2">
                   {['10', '25', '50', '100'].map((val) => (
                     <button
@@ -188,7 +188,7 @@ export const CharityView: React.FC<CharityViewProps> = ({ charityStats, onDonate
                           : 'bg-slate-950 text-slate-300 hover:bg-slate-800'
                       }`}
                     >
-                      ${val}
+                      €{val}
                     </button>
                   ))}
                 </div>
@@ -217,7 +217,7 @@ export const CharityView: React.FC<CharityViewProps> = ({ charityStats, onDonate
                 className="w-full bg-gradient-to-r from-amber-500 to-yellow-500 text-slate-950 font-black py-3.5 rounded-2xl text-xs flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-amber-900/30 hover:scale-[1.01] transition-all"
               >
                 <Heart className="w-4 h-4 fill-slate-950" />
-                <span>Confirm Donation of ${amount || 10}</span>
+                <span>Confirm Donation of €{amount || 10}</span>
               </button>
             </form>
           )}
@@ -235,7 +235,7 @@ export const CharityView: React.FC<CharityViewProps> = ({ charityStats, onDonate
               <div key={d.id} className="bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-1">
                 <div className="flex items-center justify-between text-xs">
                   <span className="font-bold text-white">{d.name}</span>
-                  <span className="font-black text-emerald-400">${d.amount}</span>
+                  <span className="font-black text-emerald-400">€{d.amount}</span>
                 </div>
                 <p className="text-xs text-slate-300 italic">"{d.message}"</p>
                 <p className="text-[10px] text-slate-500">{d.date}</p>

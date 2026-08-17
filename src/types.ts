@@ -141,7 +141,7 @@ export interface SkillChallenge {
   title: string;
   category: string;
   points: number;
-  charityUnlockAmount: number; // e.g. $10 donated upon completion
+  charityUnlockAmount: number; // e.g. €10 donated upon completion
   badgeName: string;
   description: string;
   targetCount: string;
