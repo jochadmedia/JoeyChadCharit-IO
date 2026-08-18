@@ -34,7 +34,7 @@ export const AboutJoeyView: React.FC = () => {
             <p className="text-xl text-emerald-400 font-semibold tracking-wide">2006 – 2026</p>
             <p className="text-slate-300 text-sm md:text-base max-w-2xl leading-relaxed mt-4">
               A 20-year-old rising football talent from the Ogbodo family of Enugu, Nigeria, who called Dublin, Ireland his home. 
-              Joey was a force of nature on the pitch and a "kind soul" off it, whose promising career was tragically cut short 
+              Joey was a force of nature on the pitch and a "kind soul" off it, whose promising career was tragically ended 
               just as he achieved a major professional milestone in Europe.
             </p>
             
@@ -49,7 +49,7 @@ export const AboutJoeyView: React.FC = () => {
               </span>
               <span className="flex items-center gap-1.5 text-xs text-slate-400 font-medium">
                 <Church className="w-4 h-4 text-blue-500" />
-                Mercy Christian Fellowship
+                Christ Embassy Ireland
               </span>
             </div>
           </div>
@@ -120,11 +120,17 @@ export const AboutJoeyView: React.FC = () => {
               <Church className="w-5 h-5 text-amber-400" />
               A Foundation of Faith
             </h3>
+            <p className="text-sm text-slate-400 leading-relaxed mb-3">
+              Joey was a young man of profound faith and deeply involved in his religious community. His birth church was{' '}
+              <span className="text-white font-semibold">Mercy Christian Fellowship</span>, and he was a dedicated member of{' '}
+              <span className="text-white font-semibold">Christ Embassy Ireland</span>, which supported his family by{' '}
+              <span className="text-emerald-400 font-semibold">single-handedly covering his funeral expenses</span>.
+            </p>
             <p className="text-sm text-slate-400 leading-relaxed">
-              Joey was a young man of profound faith and a deeply involved member of his religious community. 
-              As a dedicated member of Christ Embassy Ireland and Mercy Christian Fellowship, he served on the 
-              technical team and in the youth church. He was remembered as a "soul winner" who loved evangelism 
-              and spreading good news through his faith.
+              Within the church, Joey served on the <span className="text-white font-semibold">technical team</span> and was an active 
+              part of the <span className="text-white font-semibold">Teenager/Youth church at the zonal level</span>. He was remembered 
+              as a <span className="text-amber-300 font-semibold">"soul winner"</span> who loved participating in evangelism using the{' '}
+              <em>Rhapsody of Realities</em> to spread the good news of his faith.
             </p>
           </div>
         </div>
