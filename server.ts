@@ -6,7 +6,7 @@ import { GoogleGenAI } from "@google/genai";
 import dotenv from "dotenv";
 import getPort from "get-port";
 
-dotenv.config();
+dotenv.config({ path: [".env.local", ".env"] });
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -16,9 +16,10 @@ const app = express();
 app.use(express.json({ limit: "10mb" }));
 
 // Initialize Google GenAI
-const ai = process.env.GEMINI_API_KEY
+const apiKey = process.env.GEMINI_API_KEY || process.env.VITE_GEMINI_API_KEY;
+const ai = apiKey
   ? new GoogleGenAI({
-      apiKey: process.env.GEMINI_API_KEY,
+      apiKey: apiKey,
       httpOptions: {
         headers: {
           "User-Agent": "aistudio-build",
