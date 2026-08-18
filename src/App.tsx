@@ -36,10 +36,10 @@ export default function App() {
   const [authModal, setAuthModal] = useState({ showAuth: false });
   const [isSignUp, setIsSignUp] = useState(false);
   const [charityStats, setCharityStats] = useState<CharityStats>({
-    totalRaised: 128450,
-    goal: 250000,
+    totalRaised: 200.50,
+    goal: 15000,
     donorCount: 3420,
-    featuredCharity: "Joey Chad Youth Football & Mental Health Initiative",
+    featuredCharity: "Joey Chad Youth Football & Grassroots Football Initiative",
     recentDonations: [
       { id: "1", name: "Liam O'Connor", amount: 100, message: "For Joey! Keep inspiring the next generation. ⚽", date: "2 mins ago" },
       { id: "2", name: "Dublin Football Academy", amount: 500, message: "Honored to support Joey's legacy.", date: "15 mins ago" },
