@@ -150,7 +150,7 @@ export default function App() {
 
   return (
     <ToastProvider>
-      <div className="min-h-screen bg-[#070F1B] text-slate-100 flex flex-col font-sans selection:bg-emerald-500 selection:text-slate-950">
+      <div className="min-h-screen bg-[#070F1B] text-slate-100 flex flex-col font-sans selection:bg-emerald-500 selection:text-slate-950 pb-20 md:pb-0">
         {/* Navbar with Charity Banner */}
         <Navbar
           activeTab={activeTab}
